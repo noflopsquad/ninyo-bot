@@ -1,5 +1,5 @@
 module.exports = (robot) ->
-  robot.respond /(.*)(peli|peli esa)( de)? (.*)/i, (msg) ->
+  robot.respond /(.*)(peli esa|peli)( de)? (.*)/i, (msg) ->
     query = msg.match[3]
     msg.http("http://omdbapi.com/")
       .query({
