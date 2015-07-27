@@ -33,7 +33,7 @@ module.exports = (robot) ->
     currentPomodoro = {}
 
     currentPomodoro.func = ->
-      msg.send "Pomodoro terminao!"
+      msg.send "@everyone Pomodoro terminao!"
       currentPomodoro = null
       robot.brain.data.pomodoros += 1
 
