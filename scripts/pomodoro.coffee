@@ -27,13 +27,13 @@ module.exports = (robot) ->
   robot.respond /start pomodoro ?(\d+)?/i, (msg) ->
 
     if currentPomodoro?
-      msg.send "Pomodoro already started"
+      msg.send "Ya está arrancado el pomodoro, tarao."
       return
 
     currentPomodoro = {}
 
     currentPomodoro.func = ->
-      msg.send "Pomodoro completed!"
+      msg.send "Pomodoro terminao!"
       currentPomodoro = null
       robot.brain.data.pomodoros += 1
 
@@ -41,13 +41,13 @@ module.exports = (robot) ->
     currentPomodoro.length = defaultLength
     currentPomodoro.length = parseInt(msg.match[1]) if msg.match[1]?
 
-    msg.send "Pomodoro started!"
+    msg.send "Pomodoro arrancao!"
 
     currentPomodoro.timer = setTimeout(currentPomodoro.func, currentPomodoro.length * 60 * 1000)
 
   robot.respond /pomodoro\?/i, (msg) ->
     unless currentPomodoro?
-      msg.send "You have not started a pomodoro"
+      msg.send "No has arrancao ningún pomodoro, tarao"
       return
 
     minutes = currentPomodoro.time.getTime() + currentPomodoro.length * 60 * 1000
@@ -55,17 +55,17 @@ module.exports = (robot) ->
 
     minutes = Math.round(minutes / 1000 / 60)
 
-    msg.send "There are still #{minutes} minutes in this pomodoro"
+    msg.send "Todavía le quedan #{minutes} minutos al pomodoro"
 
   robot.respond /stop pomodoro/i, (msg) ->
     unless currentPomodoro?
-      msg.send "You have not started a pomodoro"
+      msg.send "No has arrancao ningún pomodoro, tarao"
       return
 
     clearTimeout(currentPomodoro.timer)
 
     currentPomodoro = null
-    msg.send "Pomodoro stopped!"
+    msg.send "Pomodoro parao!"
 
   robot.respond /total pomodoros/i, (msg) ->
-    msg.send "You have completed #{robot.brain.data.pomodoros} pomodoros"
+    msg.send "Habéis hecho #{robot.brain.data.pomodoros} pomodoros, taraos"
