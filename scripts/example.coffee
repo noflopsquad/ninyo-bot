@@ -14,6 +14,8 @@ module.exports = (robot) ->
   robot.respond /(.*)feo(.*)/, (res) ->
     res.send "Tu madre no piensa lo mismo"
   
+  robot.hear /(.*)mierda(.*)/, (res) ->
+    res.send "https://c2.staticflickr.com/8/7427/11122734693_acf3506b39_z.jpg"
   # robot.hear /I like pie/i, (res) ->
   #   res.emote "makes a freshly baked pie"
   #
