@@ -29,8 +29,14 @@ var _ = require("underscore");
 module.exports = function(robot) {
     "use strict";
 
+    var HANGOUT = '/hangout';
     // Constants.
-    var STANDUP_MESSAGES = ["La #daily mamones!", "Que si eso... hacemos una #daily"];
+    var STANDUP_MESSAGES = [
+    "La #daily mamones!", 
+    "Que si eso... hacemos una #daily",
+    "Mira que viene siendo la hora de la #daily",
+    "Primos la #daily"
+    ];
 
     var PREPEND_MESSAGE = process.env.HUBOT_STANDUP_PREPEND || "";
     if (PREPEND_MESSAGE.length > 0 && PREPEND_MESSAGE.slice(-1) !== " ") {
@@ -103,6 +109,7 @@ module.exports = function(robot) {
     function doStandup(room) {
         var message = PREPEND_MESSAGE + _.sample(STANDUP_MESSAGES);
         robot.messageRoom(room, message);
+        robot.messageRoom(room, HANGOUT);
     }
 
     // Finds the room for most adaptors
@@ -155,17 +162,17 @@ module.exports = function(robot) {
 
     robot.respond(/delete all standups/i, function(msg) {
         var standupsCleared = clearAllStandupsForRoom(findRoom(msg));
-        msg.send("Deleted " + standupsCleared + " standup" + (standupsCleared === 1 ? "" : "s") + ". No more standups for you.");
+        msg.send("Borraos " + standupsCleared + " daily" + (standupsCleared === 1 ? "" : "s") + ". No hay dailys.");
     });
 
     robot.respond(/delete ([0-5]?[0-9]:[0-5]?[0-9]) standup/i, function(msg) {
         var time = msg.match[1];
         var standupsCleared = clearSpecificStandupForRoom(findRoom(msg), time);
         if (standupsCleared === 0) {
-            msg.send("Nice try. You don't even have a standup at " + time);
+            msg.send("Tarao, a esa hora no hay ná puesto " + time);
         }
         else {
-            msg.send("Deleted your " + time + " standup.");
+            msg.send("Borrá la daily que había a las" + time);
         }
     });
 
@@ -175,7 +182,7 @@ module.exports = function(robot) {
         var room = findRoom(msg);
 
         saveStandup(room, time);
-        msg.send("Ok, from now on I'll remind this room to do a standup every weekday at " + time);
+        msg.send("Vale, tos los días a las " + time + " te tiro una #daily");
     });
 
     robot.respond(/create standup ((?:[01]?[0-9]|2[0-4]):[0-5]?[0-9]) UTC([+-][0-9])$/i, function(msg) {
@@ -185,17 +192,17 @@ module.exports = function(robot) {
         var room = findRoom(msg);
 
         saveStandup(room, time, utc);
-        msg.send("Ok, from now on I'll remind this room to do a standup every weekday at " + time + " UTC" + utc);
+        msg.send("Vale, tos los días a las " + time + " UTC" + utc + " te tiro una #daily");
     });
 
     robot.respond(/list standups$/i, function(msg) {
         var standups = getStandupsForRoom(findRoom(msg));
 
         if (standups.length === 0) {
-            msg.send("Well this is awkward. You haven't got any standups set :-/");
+            msg.send("Tarao, que no hay ninguna...");
         }
         else {
-            var standupsText = ["Here's your standups:"].concat(_.map(standups, function (standup) {
+            var standupsText = ["Tenemos dailys a las: "].concat(_.map(standups, function (standup) {
                 if (standup.utc) {
                     return standup.time + " UTC" + standup.utc;
                 } else {
@@ -210,10 +217,10 @@ module.exports = function(robot) {
     robot.respond(/list standups in every room/i, function(msg) {
         var standups = getStandups();
         if (standups.length === 0) {
-            msg.send("No, because there aren't any.");
+            msg.send("Tarao, que no hay ninguna...");
         }
         else {
-            var standupsText = ["Here's the standups for every room:"].concat(_.map(standups, function (standup) {
+            var standupsText = ["Tenemos dailys a las:"].concat(_.map(standups, function (standup) {
                 return "Room: " + standup.room + ", Time: " + standup.time;
             }));
 
@@ -223,7 +230,7 @@ module.exports = function(robot) {
 
     robot.respond(/standup help/i, function(msg) {
         var message = [];
-        message.push("I can remind you to do your daily standup!");
+        message.push("Pa que hagais las putas dailys");
         message.push("Use me to create a standup, and then I'll post in this room every weekday at the time you specify. Here's how:");
         message.push("");
         message.push(robot.name + " create standup hh:mm - I'll remind you to standup in this room at hh:mm every weekday.");
