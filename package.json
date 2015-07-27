@@ -5,6 +5,7 @@
   "author": "noflopsquad",
   "description": "El ninyo",
   "dependencies": {
+    "cron": "^1.0.9",
     "hubot": "^2.13.2",
     "hubot-diagnostics": "0.0.1",
     "hubot-flowdock": "^0.7.6",
@@ -18,7 +19,8 @@
     "hubot-rules": "^0.1.1",
     "hubot-scripts": "^2.16.1",
     "hubot-shipit": "^0.2.0",
-    "hubot-standup-alarm": "0.0.6"
+    "hubot-standup-alarm": "0.0.6",
+    "underscore": "^1.8.3"
   },
   "engines": {
     "node": "0.10.x"
