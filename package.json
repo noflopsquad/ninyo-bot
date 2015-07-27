@@ -26,5 +26,8 @@
   },
   "engines": {
     "node": "0.10.x"
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.1"
   }
 }
