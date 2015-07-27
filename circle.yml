@@ -1,3 +1,7 @@
+test:
+  override:
+    - jasmine
+
 deployment:
   staging:
     branch: master
