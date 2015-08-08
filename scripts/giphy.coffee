@@ -19,7 +19,8 @@ giphyMe = (msg, query, cb) ->
       response = undefined
       try
         response = JSON.parse(body)
-        cb response.data.images.original.url
+        image = msg.random response.data.images
+        cb image.original.url
 
       catch e
         response = undefined
