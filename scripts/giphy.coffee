@@ -8,21 +8,18 @@ module.exports = (robot) ->
       msg.send url
 
 giphyMe = (msg, query, cb) ->
-  endpoint = '/gifs/search'
+  endpoint = '/gifs/translate'
   url = "#{giphy.base_url}#{endpoint}"
 
   msg.http(url)
     .query
-      q: query
+      s: query
       api_key: giphy.api_key
     .get() (err, res, body) ->
       response = undefined
       try
         response = JSON.parse(body)
-        images = response.data
-        if images.length > 0
-          image = msg.random images
-          cb image.images.original.url
+        cb response.data.images.original.url
 
       catch e
         response = undefined
