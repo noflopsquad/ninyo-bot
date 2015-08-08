@@ -52,7 +52,7 @@ showCards = (msg) ->
 
 
   trello.get "/1/lists/53107c377f061f2c12992601/cards", {}, (err, data) ->
-    list = "Teneis estas mierdas por hacer putos vagos:\n"
+    list = "Teneis estas mierdas por hacer:\n"
     for card in data
       list += '- ' + card.name
       if card.due
