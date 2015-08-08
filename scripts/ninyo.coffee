@@ -10,6 +10,13 @@
 
 module.exports = (robot) ->
 
+  robot.router.post '/hubot/trelloCallback/', (req, res) ->
+    console.log req
+    res.send 'OK'
+
+  robot.router.get '/hubot/index/', (req, res) ->
+    console.log req
+    res.send 'OK'
 
   robot.respond /(.*)feo(.*)/, (res) ->
     res.send "Tu madre no piensa lo mismo"

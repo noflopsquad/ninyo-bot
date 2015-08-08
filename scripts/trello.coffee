@@ -26,9 +26,7 @@ module.exports = (robot) ->
   robot.respond /trello/i, (msg) ->
     showCards msg
 
-  robot.router.post '/hubot/trelloCallback/', (req, res) ->
-    console.log req
-    res.send 'OK'
+
 
 showCards = (msg) ->
   Trello = require("node-trello")
