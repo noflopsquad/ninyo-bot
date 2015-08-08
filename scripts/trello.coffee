@@ -26,7 +26,7 @@ module.exports = (robot) ->
   robot.respond /trello/i, (msg) ->
     showCards msg
 
-  robot.router.post '/trelloCallback', (req, res) ->
+  robot.router.post '/hubot/trelloCallback', (req, res) ->
     console.log req
     res.send 'OK'
 
