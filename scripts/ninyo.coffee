@@ -16,6 +16,19 @@ module.exports = (robot) ->
   
   robot.hear /(.*)mierda(.*)/, (res) ->
     res.send "https://c2.staticflickr.com/8/7427/11122734693_acf3506b39_z.jpg"
+  
+  robot.hear /(.*)(chispa|xispa)(.*)/, (res) ->
+    messages = [
+      'Mucho vicio hay por aquí...',
+      '¿Que si quiero o que si tengo?',
+      'Chispa: Partícula encendida que salta de la lumbre, del hierro herido por el pedernal',
+      'Chispa: Gota de lluvia menuda y escasa.',
+      'Chispa: Partícula de cualquier cosa. No le dieron ni una chispa de pan. Saltó de la sartén una chispa de aceite.',
+      'Chispa: Porción mínima de algo. U. m. con neg. No corre una chispa de aire.',
+      'Chispa: perspicacia de ingenio. Miguel tiene chispa.'
+    ]
+    message = res.random messages
+    res.send message
   # robot.hear /I like pie/i, (res) ->
   #   res.emote "makes a freshly baked pie"
   #
