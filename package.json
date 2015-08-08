@@ -20,6 +20,7 @@
     "hubot-rules": "^0.1.1",
     "hubot-scripts": "^2.16.1",
     "hubot-shipit": "^0.2.0",
+    "node-trello": "^1.1.2",
     "soupselect": "^0.2.0",
     "underscore": "^1.8.3",
     "underscore.string": "^3.1.1"

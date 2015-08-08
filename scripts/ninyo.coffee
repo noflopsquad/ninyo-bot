@@ -29,8 +29,10 @@ module.exports = (robot) ->
     ]
     message = res.random messages
     res.send message
-  # robot.hear /I like pie/i, (res) ->
-  #   res.emote "makes a freshly baked pie"
+
+
+  robot.hear /I like pie/i, (res) ->
+    res.emote "makes a freshly baked pie"
   #
   # lulz = ['lol', 'rofl', 'lmao']
   #
