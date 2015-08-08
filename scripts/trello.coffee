@@ -50,13 +50,13 @@ showCards = (msg) ->
 
 
   trello.get "/1/lists/53107c377f061f2c12992601/cards", {}, (err, data) ->
-    list = ""
+    list = "Teneis estas mierdas por hacer putos vagos:\n"
     for card in data
       list += '- ' + card.name
       if card.due
         list += '. Te se caduca el ' + card.due.split('T')[0]
 
       list += '\n'
-    msg.send 'Teneis estas mierdas por hacer putos vagos:'
+      
     msg.send list
     console.log err
